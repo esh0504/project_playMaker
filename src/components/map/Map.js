@@ -1,13 +1,15 @@
 /*global kakao */
-import React, { useEffect } from "react";
 import { markerdata } from "./markerData";
 import "../../components/common/common.css";
+import React, { useEffect } from 'react';
 
-export default function Map() {
+export default function Map({props}) {
   useEffect(() => {
     mapscript();
+    console.log(props)
   }, []);
-
+  const marker_clicked = props.marker_clicked;
+  const markerClick = props.onMarkerClick;
   const mapscript = () => {
     let container = document.getElementById("map");
     let options = {
@@ -35,8 +37,9 @@ export default function Map() {
 
       // 마커의 클릭 이벤트 함수 작성
       kakao.maps.event.addListener(marker, 'click', function() {
-        console.log(el.title);
         //여기에 눌렀다는 상태를 MapContent에 보내주어야함
+        markerClick();
+        console.log(marker_clicked);
       });
 
       // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
@@ -67,7 +70,10 @@ export default function Map() {
         infowindow.close();
       };
     }
+    
   };
 
-  return <div id="map" className="margin-left" style={{ width: "50%", height: "600px"}}></div>;
+  return  (
+  <div id="map" style={{ width: "50%", height: "600px", marginLeft:"25%"}}>
+  </div>);
 }

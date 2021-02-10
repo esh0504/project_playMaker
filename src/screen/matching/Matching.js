@@ -2,9 +2,14 @@ import React from "react";
 //import axios from "axios";
 import Header from "../../components/common/header";
 import "./Matching.css";
-import MapContent from "./MapContent"
+import MapContent from "../../components/map/Map"
+import { connect } from 'react-redux';
+import { actionMarkerclick } from '../../redux/actions/index';
 
 class Matching extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     // 전체 데이터 받아오기
     // 1. 매칭데이터
@@ -13,15 +18,28 @@ class Matching extends React.Component {
   }
 
   render() {
-    
     return (
       <section className="container">
         <Header/>
-        <MapContent/>
-          
+        <MapContent props={this.props}/>
       </section>
     );
   }
 }
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+      onMarkerClick: () => dispatch(actionMarkerclick()),
+  }
+}
+
+let mapStateToProps = (state) => {
+  return {
+      marker_clicked : state.markerClick.marker_clicked
+  };
+}
+
+//mapStateToProps를 사용하여 컴포넌트를 store에 연결시킨다.
+Matching = connect(mapStateToProps,mapDispatchToProps)(Matching);
 
 export default Matching;
