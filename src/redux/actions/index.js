@@ -1,8 +1,9 @@
 export const MARKERCLICK = 'MARKERCLICK';
 
 
-export function actionMarkerclick() {
+export function actionMarkerclick(marker_data) {
     return {
-        type: MARKERCLICK
+        type: MARKERCLICK,
+        marker_data: marker_data
     };
 }

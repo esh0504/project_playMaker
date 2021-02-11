@@ -2,9 +2,10 @@ import React from "react";
 //import axios from "axios";
 import Header from "../../components/common/header";
 import "./Matching.css";
-import MapContent from "../../components/map/Map"
+import Map from "../../components/map/Map";
 import { connect } from 'react-redux';
 import { actionMarkerclick } from '../../redux/actions/index';
+import MarkerInfo from "../../components/map/MarkerInfo";
 
 class Matching extends React.Component {
   constructor(props) {
@@ -21,7 +22,8 @@ class Matching extends React.Component {
     return (
       <section className="container">
         <Header/>
-        <MapContent props={this.props}/>
+        <Map store={this.props.store}/>
+        <MarkerInfo store={this.props.store}/>
       </section>
     );
   }

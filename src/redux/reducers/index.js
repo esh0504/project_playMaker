@@ -1,14 +1,14 @@
 import { MARKERCLICK } from '../actions/index';
-import { combineReducers } from 'redux';
+import { bindActionCreators, combineReducers } from 'redux';
 
-const counterInitialState = { isLogin: false, marker_clicked: false };
+const counterInitialState = { isLogin: false, marker_clicked: null };
 
 const markerClick = (state = counterInitialState, action) => {
     switch (action.type) {
         case MARKERCLICK:
             return state = {
                 ...state,
-                marker_clicked : !state.marker_clicked
+                marker_clicked : action.marker_data
             }
         default: return state;
     }
